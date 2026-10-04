@@ -34,7 +34,7 @@ function Cta({ children = 'Get started', outline = false }: { children?: string;
   return <Button asChild variant={outline ? 'outline' : 'default'} className={`mc-pill ${outline ? 'mc-outline' : ''}`}><a href={outline ? `${site}/pricing` : signup}>{children}</a></Button>;
 }
 
-const benefits = [
+const benefits: [{ title: string; copy: string }, { title: string; copy: string }, { title: string; copy: string }] = [
   { title: 'AI Replies', copy: 'AI + All of your crucial context = Every question answered pitch-perfectly, building trust 24/7.' },
   { title: 'AI Comments', copy: "Catch compliments before Meta's 24-hour window closes. Turn fans into customers." },
   { title: 'AI Goals', copy: 'Those AI automations are pulling some serious numbers. Link them to your goals, and watch the AI naturally turn aimless browsers into buyers.' },
