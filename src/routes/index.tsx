@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import heroVideo from '@/assets/manychat/hero.webm.asset.json';
 import flowImage from '@/assets/manychat/01-desktop-v1.webp.asset.json';
@@ -67,19 +66,23 @@ function SectionHeading({ title, copy }: { title: string; copy: string }) {
 }
 
 function Index() {
-  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="mc-page">
       <header className="mc-header">
         <a className="mc-logo" href={site} aria-label="Manychat home">Manychat</a>
-        <nav className={`mc-nav ${menuOpen ? 'open' : ''}`} aria-label="Main navigation">
+        <nav className="mc-nav" aria-label="Main navigation">
           <a href={`${site}/product`}>Product</a><a href={`${site}/solutions`}>Solutions</a><a href={`${site}/agencies`}>Agencies</a><a href={`${site}/pricing`}>Pricing</a><a href={`${site}/resources`}>Resources</a>
         </nav>
         <div className="mc-nav-actions">
           <Button asChild variant="ghost" className="mc-header-cta"><a href={signup}>Get started</a></Button>
           <a className="mc-signin" href="https://app.manychat.com/login">Sign in</a>
         </div>
-        <Button variant="ghost" size="icon" className="mc-mobile-toggle" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={22} /> : <Menu size={22} />}</Button>
+        <details className="mc-mobile-menu">
+          <summary className="mc-mobile-toggle" aria-label="Toggle menu"><Menu size={22} /></summary>
+          <nav className="mc-mobile-links" aria-label="Mobile navigation">
+            <a href={`${site}/product`}>Product</a><a href={`${site}/solutions`}>Solutions</a><a href={`${site}/agencies`}>Agencies</a><a href={`${site}/pricing`}>Pricing</a><a href={`${site}/resources`}>Resources</a>
+          </nav>
+        </details>
       </header>
 
       <main>
