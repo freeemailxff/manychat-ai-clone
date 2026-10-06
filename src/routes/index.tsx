@@ -1,145 +1,60 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Menu } from 'lucide-react';
+import { AudioLines, BookOpen, Braces, Check, Film, Headphones, Menu, Mic2, MoveUpRight, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import heroVideo from '@/assets/manychat/hero.webm.asset.json';
-import flowImage from '@/assets/manychat/01-desktop-v1.webp.asset.json';
-import textImage from '@/assets/manychat/02-desktop.webp.asset.json';
-import stepImage from '@/assets/manychat/03-desktop.webp.asset.json';
-import intentImage from '@/assets/manychat/04-desktop.webp.asset.json';
-import instagram from '@/assets/manychat/instagram.png.asset.json';
-import tiktok from '@/assets/manychat/tiktok.svg.asset.json';
-import whatsapp from '@/assets/manychat/whatsapp.svg.asset.json';
-import messenger from '@/assets/manychat/messenger.svg.asset.json';
-import aiCta from '@/assets/manychat/ai-cta.svg.asset.json';
-
-const signup = 'https://app.manychat.com/signup/facebookAuth?channel=instagram';
-const site = 'https://manychat.com';
+import { VoicePreview } from '@/components/voice-preview';
+import actorImage from '@/assets/voicefy/voice-actor.jpg';
+import podcastImage from '@/assets/voicefy/podcast.jpg';
+import bookImage from '@/assets/voicefy/audiobook.jpg';
 
 export const Route = createFileRoute('/')({
-  head: () => ({
-    meta: [
-      { title: 'Manychat AI | Stay human at superhuman scale' },
-      { name: 'description', content: 'Make more connections without losing your voice. Manychat AI learns your vibe, multiplies your impact, and simplifies your work.' },
-      { property: 'og:title', content: 'Manychat AI | Stay human at superhuman scale' },
-      { property: 'og:description', content: 'Make more connections without losing your voice. AI that learns your vibe, multiplies your impact, and simplifies your work.' },
-      { property: 'og:type', content: 'website' },
-      { name: 'twitter:card', content: 'summary_large_image' },
-    ],
-  }),
-  component: Index,
+  head: () => ({ meta: [
+    { title: 'Voicefy AI — Text to Speech in English, Bengali & Hindi' },
+    { name: 'description', content: 'Meet Voicefy AI. A premium text-to-speech experience designed for 400+ voices in English, Bengali, and Hindi, with a developer-first speech API.' },
+    { property: 'og:title', content: 'Voicefy AI — Give your words a voice' },
+    { property: 'og:description', content: 'Your stories. Three languages. 400+ voices. Discover a new way to create with Voicefy AI.' },
+    { property: 'og:type', content: 'website' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+  ] }), component: Index,
 });
 
-function Cta({ children = 'Get started', outline = false }: { children?: string; outline?: boolean }) {
-  return <Button asChild variant={outline ? 'outline' : 'default'} className={`mc-pill ${outline ? 'mc-outline' : ''}`}><a href={outline ? `${site}/pricing` : signup}>{children}</a></Button>;
+function Logo() { return <a className="mc-logo vf-logo" href="#" aria-label="Voicefy AI home"><AudioLines aria-hidden="true" />Voicefy<span>AI</span></a>; }
+function Cta({ children = 'Try a voice', outline = false, href = '#voice-studio' }: { children?: string; outline?: boolean; href?: string }) {
+  return <Button asChild variant={outline ? 'outline' : 'default'} className={`mc-pill ${outline ? 'mc-outline' : ''}`}><a href={href}>{children}<MoveUpRight size={13} /></a></Button>;
 }
-
-const benefits: [{ title: string; copy: string }, { title: string; copy: string }, { title: string; copy: string }] = [
-  { title: 'AI Replies', copy: 'AI + All of your crucial context = Every question answered pitch-perfectly, building trust 24/7.' },
-  { title: 'AI Comments', copy: "Catch compliments before Meta's 24-hour window closes. Turn fans into customers." },
-  { title: 'AI Goals', copy: 'Those AI automations are pulling some serious numbers. Link them to your goals, and watch the AI naturally turn aimless browsers into buyers.' },
-];
-
+function Heading({ title, copy }: { title: string; copy: string }) { return <div className="mc-section-heading"><h2>{title}</h2><p>{copy}</p></div>; }
 const features = [
-  { title: 'Flow Builder Assistant', kicker: 'Create the purrrfect flow in seconds', points: ['Tell it your goal, then sit back and watch it build', 'Ask for advice on improving your existing flows', 'Edit any draft with easy drag-and-drop options'], image: flowImage.url, alt: 'Woman with a cat', label: 'What do you want this automation to do?', overlay: 'I want to collect emails and sell my skincare products. I post Reels and ask people to comment “GLOW” for a 10% discount.' },
-  { title: 'Text Improver', kicker: 'Light up your messages', points: ['Improve copy across your automations', 'Keep your comms engaging, clear, and on-brand', 'Refine your messaging for better customer interactions'], image: textImage.url, alt: 'Smiling man', label: 'Help me improve this text', overlay: 'Psst… our summer sale just launched — and you’re one of the first to know 😉' },
-  { title: 'AI Step', kicker: 'Create the perfect arrangement', points: ['Tell the AI what you want to achieve, and then let it do the talking', 'Flexible: Adapts its approach based on what your followers say', 'Add context: You’ve got 10k characters to tell the AI everything it needs to know'], image: stepImage.url, alt: 'Woman with flowers', label: 'In the Chat', overlay: 'Beautiful choice! We have fresh roses available this week. Want me to share some options?' },
-  { title: 'Intention Recognition', kicker: 'Your followers might be confused, but our AI isn’t', points: ['Delivers answers based on intent, not keywords', 'Understands questions in all major languages (and all major typos)', 'Handles a broad range of user needs (no babysitting needed!)'], image: intentImage.url, alt: 'Man brewing coffee', label: 'Recognized intent: Asking about price', overlay: 'This item is $25. Shipping is free 🎉' },
+  { title: 'Text in. Magic out.', kicker: 'A voice for every idea', points: ['Turn scripts, captions, and ideas into spoken stories', 'Find your sound in a catalog of 400+ voices', 'Make every word feel like it belongs to your brand'], image: actorImage, alt: 'Voice artist beside a professional studio microphone', label: 'THE VOICE BEHIND YOUR NEXT BIG IDEA', overlay: 'Warm. Confident. Unmistakably you.' },
+  { title: 'Three languages. Zero boundaries.', kicker: 'English · বাংলা · हिंदी', points: ['Speak to your audience in English, Bengali, or Hindi', 'Keep the meaning, rhythm, and personality of your words', 'Create local stories with a world-class sound'], image: podcastImage, alt: 'South Asian narrator recording in a blue-lit podcast studio', label: 'CONNECT IN THEIR LANGUAGE', overlay: 'Hello. হ্যালো. नमस्ते. A little closer to your audience.' },
+  { title: 'Make every story worth listening to.', kicker: 'From the first word to the last', points: ['Bring a distinctive voice to audiobooks and podcasts', 'Give lessons and explainers a clear, engaging delivery', 'Explore the sound that fits your next production'], image: bookImage, alt: 'Audiobook narrator reading into a recording microphone', label: 'WORDS THAT COME ALIVE', overlay: 'Once upon a time, a great story found its voice.' },
 ];
-
-const platforms = [
-  { title: 'Instagram', text: 'Effortlessly automate DMs and comment replies', icon: instagram.url, href: `${site}/product/instagram` },
-  { title: 'TikTok', text: 'Turn viral moments into meaningful conversations', icon: tiktok.url, href: `${site}/product/tiktok` },
-  { title: 'WhatsApp', text: 'Simplify communication with instant responses', icon: whatsapp.url, href: `${site}/product/whatsapp` },
-  { title: 'Messenger', text: 'Boost conversions and connect with your community', icon: messenger.url, href: `${site}/product/messenger-marketing` },
+const useCases = [
+  { title: 'Videos', text: 'A memorable voice for every reel, film, and explainer.', icon: Film },
+  { title: 'Podcasts', text: 'Set the tone for stories people want to keep hearing.', icon: Headphones },
+  { title: 'Audiobooks', text: 'Give every chapter a little more character.', icon: BookOpen },
+  { title: 'Apps & products', text: 'Put a voice at the heart of your digital experience.', icon: Braces },
 ];
-
 const faqs = [
-  ['How does AI Replies work?', 'Think about all the information that’s most important to your users, then give the AI all the details and context it needs to respond effectively. It handles it from there.'],
-  ['Will it sound like me, or like a bot?', 'Manychat AI sounds like you, because you tell it how: you can add up to 250k characters of context. AI Comments even uses your past Instagram replies to perfectly match your style.'],
-  ['Can I approve responses before they go out?', 'You’ve got the final say. With AI Comments, you approve every reply. With AI Replies, you’ll preview the AI’s recommended responses. Then, it’ll fine-tune replies based on what’s actually said.'],
-  ['Do I need to know how to code?', 'Nope. Manychat AI is simple and intuitive, no coding needed.'],
-  ['How much does it cost?', 'Manychat AI is an add-on to Manychat Pro, and costs $29/month.'],
+  ['What is Voicefy AI?', 'Voicefy AI is a text-to-speech product focused on turning written content into natural-sounding voiceovers. This page introduces the product and includes a browser-powered audio preview.'],
+  ['Which languages does Voicefy support?', 'Voicefy is designed for English, Bengali, and Hindi only. The preview uses voices installed on your device, so availability varies by browser and operating system.'],
+  ['Are there really 400+ voices?', 'The planned Voicefy catalog includes 400+ voices. The full catalog is not connected to this preview yet; the available preview voices come from your device.'],
+  ['Can I use Voicefy in my app through an API?', 'A developer API is part of the Voicefy product offering. The API section here is a concept preview, not a live endpoint. API access, authentication, and documentation will be available when the service is connected.'],
+  ['Can I download the audio or use it commercially?', 'This browser preview does not offer audio downloads. Export formats, pricing, and commercial licensing will be confirmed when the Voicefy generation service is available.'],
 ];
-
-function SectionHeading({ title, copy }: { title: string; copy: string }) {
-  return <div className="mc-section-heading"><h2>{title}</h2><p>{copy}</p></div>;
-}
 
 function Index() {
-  return (
-    <div className="mc-page">
-      <header className="mc-header">
-        <a className="mc-logo" href={site} aria-label="Manychat home">Manychat</a>
-        <nav className="mc-nav" aria-label="Main navigation">
-          <a href={`${site}/product`}>Product</a><a href={`${site}/solutions`}>Solutions</a><a href={`${site}/agencies`}>Agencies</a><a href={`${site}/pricing`}>Pricing</a><a href={`${site}/resources`}>Resources</a>
-        </nav>
-        <div className="mc-nav-actions">
-          <Button asChild variant="ghost" className="mc-header-cta"><a href={signup}>Get started</a></Button>
-          <a className="mc-signin" href="https://app.manychat.com/login">Sign in</a>
-        </div>
-        <details className="mc-mobile-menu">
-          <summary className="mc-mobile-toggle" aria-label="Toggle menu"><Menu size={22} /></summary>
-          <nav className="mc-mobile-links" aria-label="Mobile navigation">
-            <a href={`${site}/product`}>Product</a><a href={`${site}/solutions`}>Solutions</a><a href={`${site}/agencies`}>Agencies</a><a href={`${site}/pricing`}>Pricing</a><a href={`${site}/resources`}>Resources</a>
-          </nav>
-        </details>
-      </header>
-
-      <main>
-        <section className="mc-hero">
-          <div className="mc-hero-copy mc-container">
-            <h1>Stay human at<br />superhuman scale</h1>
-            <p>Make more connections without losing your voice. AI that learns your vibe, multiplies your impact, and simplifies your work.</p>
-            <Cta />
-          </div>
-          <div className="mc-hero-stage">
-            <div className="mc-prompt"><span>What’s the goal of the conversation?</span><strong>Send coupon code if customer asks about deals</strong></div>
-            <video className="mc-hero-video" autoPlay muted loop playsInline aria-label="Manychat AI conversation demonstration"><source src={heroVideo.url} type="video/webm" /></video>
-          </div>
-        </section>
-
-        <section className="mc-section mc-assistant mc-container">
-          <SectionHeading title="Your always-on social media assistant" copy="Set and forget. Minimum effort, maximum outcomes." />
-          <div className="mc-assistant-grid">
-            <article className="mc-assistant-item"><div className="mc-assistant-visual"><div className="mc-faux-phone"><div className="faux-top">✦ &nbsp; Messages</div><div className="mc-bubble">Hey! Is this still available?</div><div className="mc-bubble out">Hey there! Yes, it is ✨</div><div className="mc-bubble">Amazing! Tell me more</div></div></div><h3>{benefits[0].title}</h3><p>{benefits[0].copy}</p></article>
-            <article className="mc-assistant-item"><div className="mc-assistant-visual"><div className="mc-comment-stack"><div className="mc-comment"><span>♥ &nbsp; New comment</span>Love this! Where can I get one?</div><div className="mc-comment"><span>↗ &nbsp; AI suggested reply</span>So glad you love it! Check your DMs 💌</div></div></div><h3>{benefits[1].title}</h3><p>{benefits[1].copy}</p></article>
-            <article className="mc-assistant-item"><div className="mc-assistant-visual"><div className="mc-goal-graphic">↗<span>Goal achieved ✓</span></div></div><h3>{benefits[2].title}</h3><p>{benefits[2].copy}</p></article>
-          </div>
-          <div className="mc-centered-cta"><Cta /></div>
-        </section>
-
-        <section className="mc-section mc-features mc-container">
-          <SectionHeading title="Smarter automations, better conversations" copy="Improve your automations and keep your business flowing." />
-          {features.map((feature) => <article className="mc-feature" key={feature.title}>
-            <div className="mc-feature-copy"><h3>{feature.title}</h3><p className="mc-kicker">{feature.kicker}</p><ul>{feature.points.map(point => <li key={point}>{point}</li>)}</ul></div>
-            <div className="mc-feature-image"><img src={feature.image} alt={feature.alt} loading="lazy" /><div className="mc-feature-overlay"><small>✦ &nbsp; {feature.label}</small>{feature.overlay}</div></div>
-          </article>)}
-        </section>
-
-        <section className="mc-section mc-platforms mc-container">
-          <SectionHeading title="Connect everywhere you make connections" copy="Get personalized AI assistance on all these platforms." />
-          <div className="mc-platform-grid">{platforms.map(platform => <a className="mc-platform" href={platform.href} key={platform.title}><img src={platform.icon} alt="" loading="lazy" /><h3>{platform.title}</h3><p>{platform.text}</p><span>Learn more ↗</span></a>)}</div>
-        </section>
-
-        <section className="mc-section mc-container">
-          <SectionHeading title="Stop leaving money on the table" copy="Always-on AI means 24/7 earning and learning about your audience." />
-          <div className="mc-compare-grid">
-            <div className="mc-compare-panel"><span>Before Manychat:</span><h3>Losing sleep and money</h3><ul><li>Racing Meta's 24-hour reply window manually</li><li>Only 20% of your content is working</li><li>Followers wander without clear next steps</li><li>Missing sales every time you’re offline (the audacity!)</li></ul><Cta /></div>
-            <div className="mc-compare-panel after"><span>After Manychat:</span><h3>Have your cake and eat it, too</h3><ul><li>Every interaction caught while still hot</li><li>Every post pulls its weight</li><li>Automatically guide lost visitors toward your goals</li><li>Making money while living your actual life</li></ul><Cta /></div>
-          </div>
-        </section>
-
-        <section className="mc-section mc-container">
-          <SectionHeading title="Live in 5. Literally." copy="From set-up to success in less time than it takes to brew a cup of coffee." />
-          <div className="mc-steps"><div className="mc-step"><span>01 / 03</span><h3>Sign up for free</h3><p>Start your free trial* — no credit card required</p><small>*AI only available as add-on to Manychat Pro</small></div><div className="mc-step"><span>02 / 03</span><h3>Go live in minutes</h3><p>Seriously, it’s that simple</p></div><div className="mc-step"><span>03 / 03</span><h3>Cancel anytime</h3><p>But you won’t want to ;)</p></div></div>
-          <div className="mc-steps-actions"><Cta /><Cta outline>See plans</Cta></div>
-        </section>
-
-        <section className="mc-final-cta"><div className="mc-final-copy"><h2>Level up your<br />social media game</h2><p>Manychat AI is available as an add-on to your Pro plan, giving you the full oomph of AI within the Manychat platform.</p><Cta /></div><img src={aiCta.url} alt="AI assistant helping a business owner" loading="lazy" /></section>
-
-        <section className="mc-section mc-container"><div className="mc-faq"><div className="mc-section-heading"><h2>Frequently asked questions</h2></div>{faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
-      </main>
-      <footer className="mc-footer"><div className="mc-container"><div className="mc-footer-top"><a className="mc-logo" href={site}>Manychat</a><div className="mc-footer-columns"><div className="mc-footer-column"><span>Product</span><a href={`${site}/product/instagram`}>Instagram</a><a href={`${site}/product/tiktok`}>TikTok</a><a href={`${site}/product/whatsapp`}>WhatsApp</a><a href={`${site}/product/ai`}>Manychat AI</a></div><div className="mc-footer-column"><span>Explore</span><a href={`${site}/solutions`}>Solutions</a><a href={`${site}/agencies`}>Agencies</a><a href={`${site}/pricing`}>Pricing</a><a href={`${site}/resources`}>Resources</a></div><div className="mc-footer-column"><span>Company</span><a href={`${site}/about`}>About us</a><a href={`${site}/blog`}>Blog</a><a href={`${site}/contact`}>Contact</a></div></div></div><div className="mc-footer-bottom"><span>© 2026 Manychat</span><div><a href={`${site}/privacy`}>Privacy</a><a href={`${site}/terms`}>Terms</a></div></div></div></footer>
-    </div>
-  );
+  return <div className="mc-page">
+    <header className="mc-header"><Logo /><nav className="mc-nav" aria-label="Main navigation"><a href="#features">Product</a><a href="#voices">Voices</a><a href="#use-cases">Use cases</a><a href="#api">API</a><a href="#faq">FAQs</a></nav><div className="mc-nav-actions"><Button asChild variant="ghost" className="mc-header-cta"><a href="#voice-studio">Try a voice ↗</a></Button></div><details className="mc-mobile-menu"><summary className="mc-mobile-toggle" aria-label="Toggle menu"><Menu size={22} /></summary><nav className="mc-mobile-links" aria-label="Mobile navigation"><a href="#features">Product</a><a href="#voices">Voices</a><a href="#use-cases">Use cases</a><a href="#api">API</a><a href="#faq">FAQs</a></nav></details></header>
+    <main>
+      <section className="mc-hero vf-hero"><div className="mc-hero-copy mc-container"><div className="vf-eyebrow"><Sparkles size={13} /> WORDS TO VOICE. BEAUTIFULLY.</div><h1>Voicefy AI<br /><span>Sound more human.</span></h1><p>Give your words a voice worth listening to. Premium text to speech in English, Bengali, and Hindi. Your story. Your sound.</p><Cta /><div className="vf-hero-proof"><span>400+ voices</span><i /><span>3 languages</span><i /><span>Endless stories</span></div></div><div className="mc-hero-stage vf-hero-stage"><div className="vf-floating vf-float-left"><span className="vf-mini-icon"><Mic2 size={18} /></span><div><strong>Made to sound human</strong><small>A little more feeling. A lot more you.</small></div></div><VoicePreview /><div className="vf-floating vf-float-right"><Check size={18} /><div><strong>One story. Three languages.</strong><small>English · বাংলা · हिंदी</small></div></div></div></section>
+      <section className="mc-section mc-assistant mc-container" id="voices"><Heading title="Your always-on voice studio" copy="Less recording. More creating. All the personality." /><div className="mc-assistant-grid"><article className="mc-assistant-item"><div className="mc-assistant-visual vf-benefit-photo"><img src={actorImage} alt="Voice artist in a recording studio" loading="lazy" width={1200} height={1008} /><div className="vf-photo-badge"><AudioLines size={18} /> 400+ voices. One perfect fit.</div></div><h3>A voice for every vibe</h3><p>Warm and conversational. Bold and cinematic. A rich voice catalog designed to make your content unmistakable.</p></article><article className="mc-assistant-item"><div className="mc-assistant-visual"><div className="vf-language-art"><span>Hello.</span><span>হ্যালো.</span><span>नमस्ते.</span><small>THREE LANGUAGES. REAL CONNECTION.</small></div></div><h3>Closer in every language</h3><p>English, Bengali, and Hindi. Tell your story in the language your audience thinks, feels, and lives in.</p></article><article className="mc-assistant-item"><div className="mc-assistant-visual"><div className="vf-sound-art"><AudioLines size={100} strokeWidth={1.1} /><span>Ideas → audio</span><small>LET YOUR WORDS DO THE TALKING</small></div></div><h3>Create at your own pace</h3><p>From a quick voiceover to a whole new story, make room for more creativity and fewer recording sessions.</p></article></div><div className="mc-centered-cta"><Cta /></div></section>
+      <section className="mc-section mc-features mc-container" id="features"><Heading title="Better voices. Bigger possibilities." copy="Made for the creators, storytellers, and builders in you." />{features.map(feature => <article className="mc-feature" key={feature.title}><div className="mc-feature-copy"><h3>{feature.title}</h3><p className="mc-kicker">{feature.kicker}</p><ul>{feature.points.map(point => <li key={point}>{point}</li>)}</ul></div><div className="mc-feature-image"><img src={feature.image} alt={feature.alt} loading="lazy" width={1200} height={1008} /><div className="mc-feature-overlay"><small><Sparkles size={13} /> {feature.label}</small>{feature.overlay}</div></div></article>)}</section>
+      <section className="mc-section mc-platforms mc-container" id="use-cases"><Heading title="Wherever your story takes you" copy="One voice studio. A whole world of things to create." /><div className="mc-platform-grid">{useCases.map(({ title, text, icon: Icon }) => <a className="mc-platform" href="#voice-studio" key={title}><Icon className="vf-use-icon" size={36} strokeWidth={1.4} /><h3>{title}</h3><p>{text}</p><span>Explore a voice ↗</span></a>)}</div></section>
+      <section className="mc-section mc-container" id="api"><Heading title="Your product. Our voice." copy="A developer-first speech API, designed to fit right into your workflow." /><div className="vf-api-grid"><div className="mc-feature-copy"><div className="vf-eyebrow"><Braces size={16} /> BUILT FOR BUILDERS</div><h3>Great sound.<br />Less complexity.</h3><ul><li>Text-to-speech for your apps and creative workflows</li><li>English, Bengali, and Hindi voice experiences</li><li>400+ voices to match your product’s personality</li></ul><p className="vf-api-status">API access is coming with the connected Voicefy service.</p><Cta href="#faq" outline>API details</Cta></div><div className="vf-code-panel"><div className="vf-code-top"><span><Braces size={16} /> Voicefy API</span><span>CONCEPT PREVIEW</span></div><pre><code><span className="vf-code-muted">// A simpler way to speak</span>{'\n'}<span className="vf-code-key">const</span>{' audio = await voicefy.speech.create({\n'}{'  text: '}<span className="vf-code-string">"Hello, world."</span>{',\n  language: '}<span className="vf-code-string">"en"</span>{',\n  voice: '}<span className="vf-code-string">"your-selected-voice"</span>{'\n});'}</code></pre><div className="vf-code-bottom"><AudioLines size={22} /><span>Your next great voice experience.</span></div></div></div></section>
+      <section className="mc-section mc-container"><Heading title="Skip the retakes. Keep the feeling." copy="More time for the story. Less time in the recording booth." /><div className="mc-compare-grid"><div className="mc-compare-panel"><span>The old way:</span><h3>All setup.<br />So many retakes.</h3><ul><li>Finding the right voice for every project</li><li>Scheduling studios and recording sessions</li><li>Re-recording when one sentence changes</li><li>Starting from scratch for each language</li></ul><Cta /></div><div className="mc-compare-panel after"><span>The Voicefy way:</span><h3>More stories.<br />Less friction.</h3><ul><li>A voice catalog built for your creativity</li><li>Your ideas, ready for a new sound</li><li>A text-first workflow made for changes</li><li>English, Bengali, and Hindi in one place</li></ul><Cta /></div></div></section>
+      <section className="mc-section mc-container"><Heading title="From words to wow." copy="Your next voiceover starts with a little inspiration." /><div className="mc-steps"><div className="mc-step"><span>01 / 03</span><h3>Bring your words</h3><p>A script, a story, or your next big idea.</p></div><div className="mc-step"><span>02 / 03</span><h3>Find your voice</h3><p>Choose your language. Explore your sound.</p></div><div className="mc-step"><span>03 / 03</span><h3>Hear the difference</h3><p>Preview the words. Feel the possibility.</p></div></div><div className="mc-steps-actions"><Cta /><Cta href="#api" outline>Explore API</Cta></div></section>
+      <section className="mc-final-cta vf-final-cta"><img src={actorImage} alt="Voicefy voice artist at a studio microphone" loading="lazy" width={1200} height={1008} /><div className="mc-final-copy"><div className="vf-eyebrow">THIS IS YOUR MOMENT</div><h2>Give your words<br />a real voice.</h2><p>400+ voices. English, Bengali, and Hindi. A world of stories waiting to be heard.</p><Cta /></div></section>
+      <section className="mc-section mc-container" id="faq"><div className="mc-faq"><div className="mc-section-heading"><h2>A little more clarity.</h2></div>{faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
+    </main>
+    <footer className="mc-footer"><div className="mc-container"><div className="mc-footer-top"><div><Logo /><p className="vf-footer-tagline">Words to voice. Beautifully.</p></div><div className="mc-footer-columns"><div className="mc-footer-column"><span>Voicefy</span><a href="#features">Text to speech</a><a href="#voices">Voice collection</a><a href="#api">Developer API</a></div><div className="mc-footer-column"><span>Create</span><a href="#use-cases">Videos & podcasts</a><a href="#use-cases">Audiobooks</a><a href="#use-cases">Apps & products</a></div><div className="mc-footer-column"><span>Explore</span><a href="#voice-studio">Voice preview</a><a href="#faq">FAQs</a><a href="#voices">Languages</a></div></div></div><div className="mc-footer-bottom"><span>© 2026 Voicefy AI</span><span>English · বাংলা · हिंदी</span></div></div></footer>
+  </div>;
 }

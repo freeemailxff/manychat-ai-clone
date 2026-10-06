@@ -9,4 +9,5 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Keep the Manychat AI recreation as one self-contained landing page at `/` and use locally stored asset pointers for copied reference media; this preserves the reference visual identity without runtime image hotlinks.
+- Keep the Voicefy AI landing page self-contained at `/` with bundled generated media and local pointers for any copied reference media; this preserves the visual identity without runtime hotlinks.
+- Keep the browser-powered speech preview in a separate client-safe component and label device voices distinctly from the unconnected product catalog; this prevents implying live generation or API availability.
